@@ -17,7 +17,8 @@ A6 = Traslacion(A3, [0,30]) #Superior Derecho
 A7 = Traslacion(A2, PuntoCartesiano(A6)) #Superior trasero
 A8 = Traslacion(A2, PuntoCartesiano(A3)) #Inferior trasero
 
-print A1, A2, A3, A4, A5, A6, A7, A8
+poligono1 = [A1, A2, A8, A7, A5, A4, A6, A3, A6, A7, A5, A2, A1, A3, A1, A4, A1]
+
 
 traslado = PuntoCartesiano(PolarCartesiano([100, 30]))
 
@@ -31,25 +32,30 @@ B6 = Traslacion(A6, traslado) #Superior Derecho
 B7 = Traslacion(A7, traslado) #Superior trasero
 B8 = Traslacion(A8, traslado) #Inferior trasero
 
+poligono2 = [B1, B2, B8, B7, B5, B4, B6, B3, B6, B7, B5, B2, B1, B3, B1, B4, B1]
 #Figura 3
 
 traslado = PuntoCartesiano(PolarCartesiano([50, 150]))
 
-C1 = Traslacion(A2, traslado)
-C2 = Traslacion(A5, traslado) # Conecta
-C3 = Traslacion(B7, traslado) # Conecta
-C4 = Traslacion(B8, traslado)
+C1 = Traslacion(A2, traslado) #inferior izquierdo
+C2 = Traslacion(A5, traslado) # Superior izquierdo
+C3 = Traslacion(B7, traslado) # Superior Derecho
+C4 = Traslacion(B8, traslado) # Inferior derecho
+
+poligono3 = [C1, A2, B8, C4, C1, C2, A5, B7, C3, C2, C1]
 
 #Figura 4
 
 traslado = PuntoCartesiano(PolarCartesiano([50, 150]))
 
-D1 = Traslacion(C1, traslado)
-D2 = Traslacion(C4, traslado)
+D1 = Traslacion(C1, traslado) #inferior izquierdo
+D2 = Traslacion(C4, traslado) #inferior derecho
 D3 = Traslacion(D1, [0, 80]) # Trasero izquierdo
 D4 = Traslacion(D2, [0, 80]) # Trasero Derecho
-D5 = Traslacion(C2, [0, 40]) # Angulo 30
-D6 = Traslacion(C3, [0, 40]) # Angulo 210
+D5 = Traslacion(C2, [0, 50]) # Angulo 30
+D6 = Traslacion(C3, [0, 50]) # Angulo 210
+
+poligono4 = [C1, D1, D3, D4, D6, C3, D6, D5, D3, D5, C1]
 
 # Figura 2.1
 
@@ -78,42 +84,17 @@ if __name__ == '__main__':
 
         #Dibujar(ventana, ORIGEN)
         #figura 1
-        Punto(ventana, A1, NOSE)
-        Punto(ventana, A2, NOSE)
-        Punto(ventana, A3, NOSE)
-        #superiores
-        Punto(ventana, A4, NOSE)
-        Punto(ventana, A5, NOSE)
-        Punto(ventana, A6, NOSE)
-        #traseros
-        Punto(ventana, A7, NOSE)
-        Punto(ventana, A8, NOSE)
+        pygame.draw.polygon(ventana, NOSE, poligono1, 2)
 
         #Frigura 2
-        Punto(ventana, B1, NOSE)
-        Punto(ventana, B2, NOSE)
-        Punto(ventana, B3, NOSE)
-        #superiores
-        Punto(ventana, B4, NOSE)
-        Punto(ventana, B5, NOSE)
-        Punto(ventana, B6, NOSE)
-        #traseros
-        Punto(ventana, B7, NOSE)
-        Punto(ventana, B8, NOSE)
+        pygame.draw.polygon(ventana, NOSE, poligono2, 2)
 
         #Figura 3
-        Punto(ventana, C1, AZUL)
-        Punto(ventana, C2, AZUL)
-        Punto(ventana, C3, AZUL)
-        Punto(ventana, C4, AZUL)
+        pygame.draw.polygon(ventana, NOSE, poligono3, 2)
 
         #Figura 4
-        Punto(ventana, D1, VERDE)
-        Punto(ventana, D2, VERDE)
-        Punto(ventana, D3, VERDE)
-        Punto(ventana, D4, VERDE)
-        Punto(ventana, D5, VERDE)
-        Punto(ventana, D6, VERDE)
+        pygame.draw.polygon(ventana, NOSE, poligono4, 2)
+
 
         #figura 2.1
         Punto(ventana, F1, ROJO)
