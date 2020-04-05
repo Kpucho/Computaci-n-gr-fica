@@ -7,6 +7,9 @@ ALTO = 700
 BLANCO = [150, 150, 150]
 NOSE = [150, 30, 70]
 VERDE = [0, 255, 0]
+AZUL = [0, 0, 255]
+AMARILLO = [0, 255, 255]
+ROJO = [255,0,0]
 
 
 def Dibujar(v, origen):
