@@ -6,6 +6,7 @@ ventana = pygame.display.set_mode([ANCHO, ALTO])
 fin = False
 
 #Figura 1
+
 A1 = PuntoPantalla([0, 0])  #Centro
 PolarA2 = PolarCartesiano([80, 150]) #Inferior izquierdo
 PolarA3 = PolarCartesiano([40, 30]) #Inferior  derecho
@@ -14,8 +15,8 @@ A3 = Traslacion(PolarA3, PuntoCartesiano(A1))
 A4 = Traslacion(A1, [0,30]) #Superior Centro
 A5 = Traslacion(A2, [0,30]) #Superior izquierdo
 A6 = Traslacion(A3, [0,30]) #Superior Derecho
-A7 = Traslacion(A2, PuntoCartesiano(A6)) #Superior trasero
-A8 = Traslacion(A2, PuntoCartesiano(A3)) #Inferior trasero
+A7 = Traslacion(PolarA2, PuntoCartesiano(A6)) #Superior trasero
+A8 = Traslacion(PolarA2, PuntoCartesiano(A3)) #Inferior trasero
 
 poligono1 = [A1, A2, A8, A7, A5, A4, A6, A3, A6, A7, A5, A2, A1, A3, A1, A4, A1]
 
@@ -65,7 +66,7 @@ F1 = Traslacion(D5, traslado)
 F2 = Traslacion(F1, [0, 30])
 F3 = Traslacion(D3, [0, 30])
 F4 = Traslacion(D5, [0, 30])
-F5 = Traslacion(D3, PuntoCartesiano(F2))
+F5 = Traslacion(D3, PuntoCartesiano(F1))
 
 
 #          x    y   z     Medidas
@@ -97,11 +98,12 @@ if __name__ == '__main__':
 
 
         #figura 2.1
-        Punto(ventana, F1, ROJO)
-        Punto(ventana, F2, ROJO)
+        Punto(ventana, D3, AZUL)
+        Punto(ventana, F1, VERDE)
+        Punto(ventana, F2, AMARILLO)
         Punto(ventana, F3, ROJO)
         Punto(ventana, F4, ROJO)
-        #Punto(ventana, F5, ROJO)
+        Punto(ventana, F5, ROJO)
 
 
 
