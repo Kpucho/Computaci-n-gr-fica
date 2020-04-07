@@ -10,6 +10,7 @@ VERDE = [0, 255, 0]
 AZUL = [0, 0, 255]
 AMARILLO = [0, 255, 255]
 ROJO = [255,0,0]
+NEGRO = [0,0,0]
 
 
 def Dibujar(v, origen):
@@ -32,7 +33,7 @@ def Vector(v, pos, orig):
 def Punto(v, pos, color):
     pygame.draw.circle(v, color, pos, 5)
 
-def RotarHorario(v, pos, a):
+def RotarHorario(pos, a):
     pos = PuntoCartesiano(pos)
     a = np.radians(a)
     x = int(pos[0]*np.cos(a) + pos[1]*np.sin(a))
@@ -80,6 +81,21 @@ def DibujarEquilatero(v, X):
     pygame.draw.line(v, NOSE, X, Y)
     pygame.draw.line(v, NOSE, Y, H)
     pygame.draw.line(v, NOSE, H, X)
+
+def Estrella_7_puntas(radio, Origen):
+
+    angulo=360/7
+    list=[]
+    punto1=[Origen[0]+radio, Origen[1]]
+
+    i=0
+    while i < 7:
+        aux = RotarAntiHorario(punto1, 2*i*angulo)
+        list.append(aux)
+        i+=1
+
+    return list
+
 
 def DibujarFiguraRegular(v, X, lados):
     a = 360 / lados
