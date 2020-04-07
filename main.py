@@ -8,10 +8,8 @@ fin=False
 L = 250
 Angulo = 0
 lf = Estrella_7_puntas(L, Origen)
-ln = []
+i = 0
 pygame.draw.polygon(ventana, AMARILLO, lf,1)
-N_rotacionR = 0;
-N_rotacionL = 0;
 if __name__ == '__main__':
     pygame.display.flip()
     while not fin:
@@ -22,12 +20,14 @@ if __name__ == '__main__':
                 #if event.key == pygame.K_SPACE:
 
                 if event.key == pygame.K_RIGHT:
-                    Angulo = Angulo + 2
+                    i = +2
 
                 if event.key == pygame.K_LEFT:
-                    Angulo = Angulo - 2
+                    i = -2
+
 
             ln = []
+            Angulo+= i
             for punto in lf:
                 aux = RotarHorario(punto, Angulo)
                 ln.append(aux)
