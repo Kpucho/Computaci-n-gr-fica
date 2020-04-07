@@ -9,6 +9,7 @@ L = 250
 Angulo = 0
 lf = Estrella_7_puntas(L, Origen)
 i = 0
+reloj=pygame.time.Clock()
 pygame.draw.polygon(ventana, AMARILLO, lf,1)
 if __name__ == '__main__':
     pygame.display.flip()
@@ -35,3 +36,4 @@ if __name__ == '__main__':
             pygame.draw.circle(ventana,AMARILLO, ORIGEN, L, 1)
             pygame.draw.polygon(ventana, AMARILLO, ln,1)
             pygame.display.flip()
+            reloj.tick(40)
