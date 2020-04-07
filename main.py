@@ -10,7 +10,7 @@ Angulo = 0
 lf = Estrella_7_puntas(L, Origen)
 i = 0
 reloj=pygame.time.Clock()
-pygame.draw.polygon(ventana, AMARILLO, lf,1)
+pygame.draw.polygon(ventana, NEGRO, lf,1)
 if __name__ == '__main__':
     pygame.display.flip()
     while not fin:
@@ -26,14 +26,13 @@ if __name__ == '__main__':
                 if event.key == pygame.K_LEFT:
                     i = -2
 
-
             ln = []
             Angulo+= i
             for punto in lf:
                 aux = RotarHorario(punto, Angulo)
                 ln.append(aux)
             ventana.fill(NEGRO)
-            pygame.draw.circle(ventana,AMARILLO, ORIGEN, L, 1)
-            pygame.draw.polygon(ventana, AMARILLO, ln,1)
+            pygame.draw.circle(ventana,BLANCO, ORIGEN, L, 1)
+            pygame.draw.polygon(ventana, ROJO, ln,1)
             pygame.display.flip()
-            reloj.tick(40)
+            reloj.tick(60)
