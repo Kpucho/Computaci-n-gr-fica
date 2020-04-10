@@ -1,6 +1,5 @@
 import pygame
 from plano import *
-import numpy as np
 
 pygame.init()
 VistaDistancia = 4
@@ -133,6 +132,10 @@ caralateral5 = [D5, D3, F3, F4]
 #con este coge toda la cara de una
 caralateraltotal = [A1, D1, F3, F4, C2, A4]
 
+#Caras Frontales
+carafrontal1 = [F4,F2,G6,G4,G2,C3,C2]
+carafrontal2 = [A4,A6,A3,A1]
+carafrontal3 = [B4,B6,B3,B1]
 
 #          x    y   z     Medidas (estas definitivamente no son :v )
 #          F    T   T
@@ -141,55 +144,58 @@ figura2 = [20, 40, 20]
 figura3 = [100, 50, 40]
 figura4 = [100, 50, 80]
 
+def Vistas():
+    ventana.fill(NEGRO)
+    pygame.draw.polygon(ventana, AZUL, carasuperior1)
+    pygame.draw.polygon(ventana, AZUL, carasuperior2)
+    pygame.draw.polygon(ventana, AZUL, carasuperior3)
+    pygame.draw.polygon(ventana, AZUL, carasuperior4)
+    pygame.draw.polygon(ventana, AZUL, carasuperior5)
+
+    pygame.display.flip()
+
+def Figura():
+    ventana.fill(NEGRO)
+    #Dibujar(ventana, ORIGEN)
+    #figura 1
+    pygame.draw.polygon(ventana, NOSE, poligono1, 2)
+
+    #Frigura 2
+    pygame.draw.polygon(ventana, NOSE, poligono2, 2)
+
+    #Figura 3
+    pygame.draw.polygon(ventana, NOSE, poligono3, 2)
+
+    #Figura 4
+    pygame.draw.polygon(ventana, NOSE, poligono4, 2)
+
+    #figura 2.1
+    pygame.draw.polygon(ventana, NOSE, poligono5, 2)
+
+    #figura 2.2
+    pygame.draw.polygon(ventana, NOSE, poligono6, 2)
+
+    #caras superiores
+    pygame.draw.polygon(ventana, AZUL, carasuperior1)
+    pygame.draw.polygon(ventana, AZUL, carasuperior2)
+    pygame.draw.polygon(ventana, AZUL, carasuperior3)
+    pygame.draw.polygon(ventana, AZUL, carasuperior4)
+    pygame.draw.polygon(ventana, AZUL, carasuperior5)
+
+    #caras laterales
+    pygame.draw.polygon(ventana, VERDE, caralateraltotal)
+
+    pygame.display.flip()
 
 if __name__ == '__main__':
+    Figura()
     while not fin:
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 fin = True
-            
-
-
-        #Dibujar(ventana, ORIGEN)
-        #figura 1
-        pygame.draw.polygon(ventana, NOSE, poligono1, 2)
-
-        #Frigura 2
-        pygame.draw.polygon(ventana, NOSE, poligono2, 2)
-
-        #Figura 3
-        pygame.draw.polygon(ventana, NOSE, poligono3, 2)
-
-        #Figura 4
-        pygame.draw.polygon(ventana, NOSE, poligono4, 2)
-
-        #figura 2.1
-        pygame.draw.polygon(ventana, NOSE, poligono5, 2)
-
-        #figura 2.2
-        pygame.draw.polygon(ventana, NOSE, poligono6, 2)
-
-        #caras superiores
-        pygame.draw.polygon(ventana, AZUL, carasuperior1)
-        pygame.draw.polygon(ventana, AZUL, carasuperior2)
-        pygame.draw.polygon(ventana, AZUL, carasuperior3)
-        pygame.draw.polygon(ventana, AZUL, carasuperior4)
-        pygame.draw.polygon(ventana, AZUL, carasuperior5)
-
-        #caras laterales
-        pygame.draw.polygon(ventana, VERDE, caralateraltotal)
-
-
-
-
-"""
-def RotarAntiHorario(Pto, t, Origen):
-    Pto1 = from_Pantalla_to_Carte(Origen,Pto)
-
-    angulo=math.radians(t)
-    X = int(Pto1[0]*math.cos(angulo) - Pto1[1]*math.sin(angulo))
-    Y = int(Pto1[0]*math.sin(angulo) + Pto1[1]*math.cos(angulo))
-
-    return  from_Carte_to_pantalla(Origen, [X,Y])
-"""
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    Vistas()
+            if event.type == pygame.KEYUP:
+                Figura()
