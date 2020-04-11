@@ -1,16 +1,22 @@
 import pygame
 import math as np
 
-ANCHO = 500
-ALTO = 500
-ORIGEN =  [ANCHO/2, 2*ALTO/3]
+Theta = 45
+Alfa = 150
+ANCHO = 700
+ALTO = 700
+ORIGEN =  [ANCHO/2, 1.5*ALTO/3]
 BLANCO = [150, 150, 150]
-NOSE = [150, 30, 70]
-VERDE = [0, 255, 0]
+NOSE = [218, 3, 255]
+VERDE = [0, 247, 0]
 AZUL = [0, 0, 255]
-AMARILLO = [0, 255, 255]
+AMARILLO = [255, 255,0]
 ROJO = [255,0,0]
 NEGRO = [0,0,0]
+#Traslacion para cada vista
+Tfrontal = [-200,-340]
+Tsuperior = [30,-300]
+Tlateral = [340,-300]
 
 
 def Dibujar(v, origen):
