@@ -1,8 +1,8 @@
 import pygame
 import math as np
 
-Theta = 45
-Alfa = 150
+Theta = 30
+Alfa = 135
 ANCHO = 700
 ALTO = 700
 ORIGEN =  [ANCHO/2, 1.5*ALTO/3]

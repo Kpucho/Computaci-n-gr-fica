@@ -14,15 +14,14 @@ PolarA2 = PolarCartesiano([80, Alfa]) #Inferior izquierdo
 PolarA3 = PolarCartesiano([40, Theta]) #Inferior  derecho
 A2 = Traslacion(PolarA2, PuntoCartesiano(A1))
 A3 = Traslacion(PolarA3, PuntoCartesiano(A1))
-A4 = Traslacion(A1, [0,30]) #Superior Centro
-A5 = Traslacion(A2, [0,30]) #Superior izquierdo
-A6 = Traslacion(A3, [0,30]) #Superior Derecho
+A4 = Traslacion(A1, [0,40]) #Superior Centro
+A5 = Traslacion(A2, [0,40]) #Superior izquierdo
+A6 = Traslacion(A3, [0,40]) #Superior Derecho
 A7 = Traslacion(PolarA2, PuntoCartesiano(A6)) #Superior trasero
 A8 = Traslacion(PolarA2, PuntoCartesiano(A3)) #Inferior trasero
 
-poligono1 = [A1, A2, A8, A7, A5, A4, A6, A3, A6, A7, A5, A2, A1, A3, A1, A4, A1]
 
-traslado = PuntoCartesiano(PolarCartesiano([100, Theta]))
+traslado = PuntoCartesiano(PolarCartesiano([80, Theta]))
 
 #Figura 1.1
 B1 = Traslacion(A1, traslado) #Centro
@@ -34,50 +33,42 @@ B6 = Traslacion(A6, traslado) #Superior Derecho
 B7 = Traslacion(A7, traslado) #Superior trasero
 B8 = Traslacion(A8, traslado) #Inferior trasero
 
-poligono2 = [B1, B2, B8, B7, B5, B4, B6, B3, B6, B7, B5, B2, B1, B3, B1, B4, B1]
 
 #Figura 3
 
-traslado = PuntoCartesiano(PolarCartesiano([50, Alfa]))
+traslado = PuntoCartesiano(PolarCartesiano([40, Alfa]))
 
 C1 = Traslacion(A2, traslado) #inferior izquierdo
 C2 = Traslacion(A5, traslado) # Superior izquierdo
 C3 = Traslacion(B7, traslado) # Superior Derecho
 C4 = Traslacion(B8, traslado) # Inferior derecho
 
-poligono3 = [C1, A2, B8, C4, C1, C2, A5, B7, C3, C2, C1]
-
 #Figura 4
 
-traslado = PuntoCartesiano(PolarCartesiano([50, Alfa]))
+#traslado = PuntoCartesiano(PolarCartesiano([40, Alfa]))
 
 D1 = Traslacion(C1, traslado) #inferior izquierdo
 D2 = Traslacion(C4, traslado) #inferior derecho
-D3 = Traslacion(D1, [0, 80]) # Trasero izquierdo
-D4 = Traslacion(D2, [0, 80]) # Trasero Derecho
-D5 = Traslacion(C2, [0, 50]) # Frente izquierdo
-D6 = Traslacion(C3, [0, 50]) # Frente derecho
-
-
-poligono4 = [C1, D1, D3, D4, D6, C3, D6, D5, D3, D5, C1]
+D3 = Traslacion(D1, [0, 100]) # Trasero izquierdo
+D4 = Traslacion(D2, [0, 100]) # Trasero Derecho
+D5 = Traslacion(C2, [0, 60]) # Frente izquierdo
+D6 = Traslacion(C3, [0, 60]) # Frente derecho
 
 # Figura 2.1
 
-traslado = PuntoCartesiano(PolarCartesiano([30, Theta]))
+traslado = PuntoCartesiano(PolarCartesiano([20, Theta]))
 
-PolarF5 = PolarCartesiano([50, 150])
+PolarF5 = PolarCartesiano([40, Alfa])
 
 F1 = Traslacion(D5, traslado) #frente Derecho
-F2 = Traslacion(F1, [0, 30]) #Frente superior derecho
-F3 = Traslacion(D3, [0, 30]) #Trasero superior izquierdo
-F4 = Traslacion(D5, [0, 30]) #Frente superior izquierdo
+F2 = Traslacion(F1, [0, 20]) #Frente superior derecho
+F3 = Traslacion(D3, [0, 20]) #Trasero superior izquierdo
+F4 = Traslacion(D5, [0, 20]) #Frente superior izquierdo
 F5 = Traslacion(PolarF5, PuntoCartesiano(F2)) #Trasero derecho superior
-F6 = Traslacion(F5, [0,-30])
-poligono5 = [D5, F1, F2, F5, F3, D3, F3, F4, F2, F1, D5, F4, D5]
-
+F6 = Traslacion(F5, [0,-20])
 #figura 2.2
 
-traslado = PuntoCartesiano(PolarCartesiano([110, Theta]))
+traslado = PuntoCartesiano(PolarCartesiano([100, Theta]))
 
 G1 = Traslacion(F1, traslado)
 G2 = Traslacion(F2, traslado)
@@ -87,9 +78,9 @@ G5 = Traslacion(F5, traslado)
 G6 = Traslacion(D5, traslado)
 G7 = Traslacion(D3, traslado)
 
-poligono6 = [G6, G1, G2, G5, G3, G7, G3, G4, G2, G1, G6, G4, G6, G7, G6]
-
-
+###############################      Figuras ######################################
+poligono1 = [A1,D1,D2,B3,B1,B2,A8,A3,A1,A4,C2,C3,B6,B3,B6,B4,B1,B4,B5,B2,B5,A7,A8,A7,A6,A3,A6,A4]
+poligono2 = [G5,D2,G5,G2,C3,G2,G4,G6,F1,F2,F4,C2,F4,F3,D1,F3,F5,F2,F5,F6,F1,F6,G7,G6,G7,G3,G4,G3]
 ##################################        CARAS    #################################################
 
 #Caras superiores
@@ -186,22 +177,10 @@ def Vistas():
 def Figura():
     ventana.fill(NEGRO)
     #figura 1
-    pygame.draw.polygon(ventana, NOSE, poligono1, 2)
+    pygame.draw.polygon(ventana, NOSE, poligono1, 3)
 
     #Frigura 2
-    pygame.draw.polygon(ventana, NOSE, poligono2, 2)
-
-    #Figura 3
-    pygame.draw.polygon(ventana, NOSE, poligono3, 2)
-
-    #Figura 4
-    pygame.draw.polygon(ventana, NOSE, poligono4, 2)#
-
-    #figura 2.1
-    pygame.draw.polygon(ventana, NOSE, poligono5, 2)
-
-    #figura 2.2
-    pygame.draw.polygon(ventana, NOSE, poligono6, 2)
+    pygame.draw.polygon(ventana, NOSE, poligono2, 3)
 
     pygame.display.flip()
 
