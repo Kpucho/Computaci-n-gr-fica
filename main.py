@@ -45,8 +45,6 @@ C4 = Traslacion(B8, traslado) # Inferior derecho
 
 #Figura 4
 
-#traslado = PuntoCartesiano(PolarCartesiano([40, Alfa]))
-
 D1 = Traslacion(C1, traslado) #inferior izquierdo
 D2 = Traslacion(C4, traslado) #inferior derecho
 D3 = Traslacion(D1, [0, 100]) # Trasero izquierdo
@@ -66,6 +64,7 @@ F3 = Traslacion(D3, [0, 20]) #Trasero superior izquierdo
 F4 = Traslacion(D5, [0, 20]) #Frente superior izquierdo
 F5 = Traslacion(PolarF5, PuntoCartesiano(F2)) #Trasero derecho superior
 F6 = Traslacion(F5, [0,-20])
+
 #figura 2.2
 
 traslado = PuntoCartesiano(PolarCartesiano([100, Theta]))
@@ -81,7 +80,7 @@ G7 = Traslacion(D3, traslado)
 ###############################      Figuras ######################################
 poligono1 = [A1,D1,D2,B3,B1,B2,A8,A3,A1,A4,C2,C3,B6,B3,B6,B4,B1,B4,B5,B2,B5,A7,A8,A7,A6,A3,A6,A4]
 poligono2 = [G5,D2,G5,G2,C3,G2,G4,G6,F1,F2,F4,C2,F4,F3,D1,F3,F5,F2,F5,F6,F1,F6,G7,G6,G7,G3,G4,G3]
-##################################        CARAS    #################################################
+##################################        Vistas    #################################################
 
 #Caras superiores
 carasuperior123 = [C2, C3, B6, B4, B5, A7, A6, A4]
@@ -90,19 +89,7 @@ carasuperior5 = [G2, G5, G3, G4]
 carasuperior6 = [F6, G7, G6, F1]
 
 #Cara lateral izquierda
-                                #Esto pa que?  NO Se
-#figura1
-caralateral1 = [A1, A2, A5, A4]
-#figura 1.1
-caralateral2 = [B1, B2, B5, B4]
-#figura 3
-caralateral3 = [A2, C1, C2, A5]
-#figura 4
-caralateral4 = [C1, D1, D3, D5]
-#figura 2.1
-caralateral5 = [D5, D3, F3, F4]
 
-#con este coge toda la cara de una
 caralateraltotal = [A1, D1, F3, F4, C2, A4]
 
 #Caras Frontales
@@ -111,9 +98,18 @@ carafrontal2 = [A4,A6,A3,A1]
 carafrontal3 = [B4,B6,B3,B1]
 carafrontal4 = [A7,B5,B2,A8]
 
+#Caras inaxcesibles
+caraimposible1 = [G3,G4,G6,G7]
+caraimposible2 = [F5,F2,F1,F6]
+caraimposible3 = [B5,B4,B1,B2]
+caraimposible4 = [A7,A6,A3,A8]
 def Vistas():
     #ventana.fill(NEGRO)
-
+    #Imposible (meramente estetico)
+    pygame.draw.polygon(ventana, NEGRO, caraimposible1)
+    pygame.draw.polygon(ventana, NEGRO, carafrontal2)
+    pygame.draw.polygon(ventana, NEGRO, caraimposible3)
+    pygame.draw.polygon(ventana, NEGRO, caraimposible4)
     #Frontales
     pygame.draw.polygon(ventana, AMARILLO, carafrontal2)
     caraux = []
