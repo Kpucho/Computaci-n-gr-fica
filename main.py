@@ -1,4 +1,3 @@
-import pygame
 from plano import *
 
 pygame.init()
@@ -10,18 +9,18 @@ fin = False
 #Figura 1
 
 A1 = PuntoPantalla([0, 0])  #Centro
-PolarA2 = PolarCartesiano([80, Alfa]) #Inferior izquierdo
-PolarA3 = PolarCartesiano([40, Theta]) #Inferior  derecho
+PolarA2 = PolarCartesiano([2*TamanoCudrito, Alfa]) #Inferior izquierdo
+PolarA3 = PolarCartesiano([TamanoCudrito, Theta]) #Inferior  derecho
 A2 = Traslacion(PolarA2, PuntoCartesiano(A1))
 A3 = Traslacion(PolarA3, PuntoCartesiano(A1))
-A4 = Traslacion(A1, [0,40]) #Superior Centro
-A5 = Traslacion(A2, [0,40]) #Superior izquierdo
-A6 = Traslacion(A3, [0,40]) #Superior Derecho
+A4 = Traslacion(A1, [0,TamanoCudrito]) #Superior Centro
+A5 = Traslacion(A2, [0,TamanoCudrito]) #Superior izquierdo
+A6 = Traslacion(A3, [0,TamanoCudrito]) #Superior Derecho
 A7 = Traslacion(PolarA2, PuntoCartesiano(A6)) #Superior trasero
 A8 = Traslacion(PolarA2, PuntoCartesiano(A3)) #Inferior trasero
 
 
-traslado = PuntoCartesiano(PolarCartesiano([80, Theta]))
+traslado = PuntoCartesiano(PolarCartesiano([2*TamanoCudrito, Theta]))
 
 #Figura 1.1
 B1 = Traslacion(A1, traslado) #Centro
@@ -36,7 +35,7 @@ B8 = Traslacion(A8, traslado) #Inferior trasero
 
 #Figura 3
 
-traslado = PuntoCartesiano(PolarCartesiano([40, Alfa]))
+traslado = PuntoCartesiano(PolarCartesiano([TamanoCudrito, Alfa]))
 
 C1 = Traslacion(A2, traslado) #inferior izquierdo
 C2 = Traslacion(A5, traslado) # Superior izquierdo
@@ -47,27 +46,27 @@ C4 = Traslacion(B8, traslado) # Inferior derecho
 
 D1 = Traslacion(C1, traslado) #inferior izquierdo
 D2 = Traslacion(C4, traslado) #inferior derecho
-D3 = Traslacion(D1, [0, 100]) # Trasero izquierdo
-D4 = Traslacion(D2, [0, 100]) # Trasero Derecho
-D5 = Traslacion(C2, [0, 60]) # Frente izquierdo
-D6 = Traslacion(C3, [0, 60]) # Frente derecho
+D3 = Traslacion(D1, [0, 5*TamanoCudrito/2]) # Trasero izquierdo
+D4 = Traslacion(D2, [0, 5*TamanoCudrito/2]) # Trasero Derecho
+D5 = Traslacion(C2, [0, 3*TamanoCudrito/2]) # Frente izquierdo
+D6 = Traslacion(C3, [0, 3*TamanoCudrito/2]) # Frente derecho
 
 # Figura 2.1
 
-traslado = PuntoCartesiano(PolarCartesiano([20, Theta]))
+traslado = PuntoCartesiano(PolarCartesiano([TamanoCudrito/2, Theta]))
 
-PolarF5 = PolarCartesiano([40, Alfa])
+PolarF5 = PolarCartesiano([TamanoCudrito, Alfa])
 
 F1 = Traslacion(D5, traslado) #frente Derecho
-F2 = Traslacion(F1, [0, 20]) #Frente superior derecho
-F3 = Traslacion(D3, [0, 20]) #Trasero superior izquierdo
-F4 = Traslacion(D5, [0, 20]) #Frente superior izquierdo
+F2 = Traslacion(F1, [0, TamanoCudrito/2]) #Frente superior derecho
+F3 = Traslacion(D3, [0, TamanoCudrito/2]) #Trasero superior izquierdo
+F4 = Traslacion(D5, [0, TamanoCudrito/2]) #Frente superior izquierdo
 F5 = Traslacion(PolarF5, PuntoCartesiano(F2)) #Trasero derecho superior
-F6 = Traslacion(F5, [0,-20])
+F6 = Traslacion(F5, [0,-TamanoCudrito/2])
 
 #figura 2.2
 
-traslado = PuntoCartesiano(PolarCartesiano([100, Theta]))
+traslado = PuntoCartesiano(PolarCartesiano([5*TamanoCudrito/2, Theta]))
 
 G1 = Traslacion(F1, traslado)
 G2 = Traslacion(F2, traslado)
@@ -107,67 +106,40 @@ def Vistas():
     #ventana.fill(NEGRO)
     #Imposible (meramente estetico)
     pygame.draw.polygon(ventana, NEGRO, caraimposible1)
-    pygame.draw.polygon(ventana, NEGRO, carafrontal2)
+    pygame.draw.polygon(ventana, NEGRO, caraimposible2)
     pygame.draw.polygon(ventana, NEGRO, caraimposible3)
     pygame.draw.polygon(ventana, NEGRO, caraimposible4)
+
     #Frontales
     pygame.draw.polygon(ventana, AMARILLO, carafrontal2)
-    caraux = []
-    for i in carafrontal2:
-        caraux.append(Traslacion(i,Tfrontal))
-    pygame.draw.polygon(ventana, AMARILLO, caraux)
+    Vistar(Tfrontal,carafrontal2,ventana, AMARILLO)
+    pygame.display.flip()
 
     pygame.draw.polygon(ventana, AMARILLO, carafrontal3)
-    caraux = []
-    for i in carafrontal3:
-        caraux.append(Traslacion(i,Tfrontal))
-    pygame.draw.polygon(ventana, AMARILLO, caraux)
+    Vistar(Tfrontal,carafrontal3,ventana, AMARILLO)
 
     pygame.draw.polygon(ventana, AMARILLO, carafrontal4)
-    caraux = []
-    for i in carafrontal4:
-        caraux.append(Traslacion(i,Tfrontal))
-    pygame.draw.polygon(ventana, AMARILLO, caraux)
+    Vistar(Tfrontal,carafrontal4,ventana, AMARILLO)
 
     #Superiores
     pygame.draw.polygon(ventana, AZUL, carasuperior6)
-    caraux = []
-    for i in carasuperior6:
-        caraux.append(Traslacion(i,Tsuperior))
-    pygame.draw.polygon(ventana, AZUL, caraux)
+    Vistar(Tsuperior,carasuperior6,ventana, AZUL)
 
     pygame.draw.polygon(ventana, AMARILLO, carafrontal1)
-    caraux = []
-    for i in carafrontal1:
-        caraux.append(Traslacion(i,Tfrontal))
-    pygame.draw.polygon(ventana, AMARILLO, caraux)
+    Vistar(Tfrontal,carafrontal1,ventana, AMARILLO)
 
     pygame.draw.polygon(ventana, AZUL, carasuperior123)
-    caraux = []
-    for i in carasuperior123:
-        caraux.append(Traslacion(i,Tsuperior))
-    pygame.draw.polygon(ventana, AZUL, caraux)
+    Vistar(Tsuperior,carasuperior123,ventana, AZUL)
 
     pygame.draw.polygon(ventana, AZUL, carasuperior4)
-    caraux = []
-    for i in carasuperior4:
-        caraux.append(Traslacion(i,Tsuperior))
-    pygame.draw.polygon(ventana, AZUL, caraux)
+    Vistar(Tsuperior,carasuperior4,ventana, AZUL)
 
     pygame.draw.polygon(ventana, AZUL, carasuperior5)
-    caraux = []
-    for i in carasuperior5:
-        caraux.append(Traslacion(i,Tsuperior))
-    pygame.draw.polygon(ventana, AZUL, caraux)
+    Vistar(Tsuperior,carasuperior5,ventana, AZUL)
 
     #Laterales
     pygame.draw.polygon(ventana, VERDE, caralateraltotal)
-    caraux = []
-    for i in caralateraltotal:
-        caraux.append(Traslacion(i,Tlateral))
-    pygame.draw.polygon(ventana, VERDE, caraux)
-
-    pygame.display.flip()
+    Vistar(Tlateral,caralateraltotal,ventana, VERDE)
 
 
 def Figura():

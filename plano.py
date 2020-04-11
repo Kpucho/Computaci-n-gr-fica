@@ -1,6 +1,7 @@
 import pygame
 import math as np
 
+TamanoCudrito = 45
 Theta = 30
 Alfa = 135
 ANCHO = 700
@@ -14,10 +15,44 @@ AMARILLO = [255, 255,0]
 ROJO = [255,0,0]
 NEGRO = [0,0,0]
 #Traslacion para cada vista
-Tfrontal = [-200,-340]
-Tsuperior = [30,-300]
+Tfrontal = [-200,-300]
+Tsuperior = [30,-350]
 Tlateral = [340,-300]
 
+#x' = x + z
+#y' = y - z
+def _3d_to_2d(Pto):
+    Pto2d = [Pto[0]+Pto[2],Pto[1]-Pto[2]]
+    return Pto2d
+
+#x' = XCos(theta) + ZSin(theta)
+#y' = Y
+#z' = ZCos(theta) - XSen(theta)
+def RotarEnY(Pto, Angulo):
+    Angulo = np.radians(Angulo)
+    x = Pto[0]*np.cos(Angulo) + Pto[2]*np.sin(Angulo)
+    z = Pto[2]*np.cos(Angulo) - Pto[0]*np.sin(Angulo)
+
+def Vistar(Move,List,ventana, COLOR):
+    caraux = []
+    for i in List:
+        #traslado = [0, -Distancia(i)*np.tan(Angulo(i))]
+        #aux = Traslacion(i, traslado)
+        caraux.append(Traslacion(i,Move))
+    pygame.draw.polygon(ventana, COLOR, caraux)
+
+def Distancia(Pto1):
+    Pto1 = PuntoCartesiano(Pto1)
+    Distance = np.sqrt(np.pow(Pto1[0],2)+np.pow(Pto1[1],2))
+    return Distance
+
+def Angulo(Pto):
+    if Pto[0] == 0:
+        if Pto[1] == 0:
+            return 0
+        else:
+            return 90
+    return np.atan(Pto[1]/Pto[0])
 
 def Dibujar(v, origen):
     pygame.draw.line(v, BLANCO, [origen[0], 0], [origen[0], ALTO], 1)
