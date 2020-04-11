@@ -6,17 +6,6 @@ VistaDistancia = 4
 ventana = pygame.display.set_mode([ANCHO, ALTO])
 fin = False
 
-"""
-Rota el punto alrededor del eje x segun una angulo engrados.
-def rotaY(Pto,angulo):
-    rad = angulo * math.pi / 180
-    cosa = math.cos(rad)
-    sina = math.sin(rad)
-    #z = self.z * cosa - self.x * sina
-    x = self.z * sina + self.x * cosa
-    return [x, y]
-"""
-
 ##################################        PUNTOS    #################################################
 
 #Figura 1
@@ -33,7 +22,6 @@ A7 = Traslacion(PolarA2, PuntoCartesiano(A6)) #Superior trasero
 A8 = Traslacion(PolarA2, PuntoCartesiano(A3)) #Inferior trasero
 
 poligono1 = [A1, A2, A8, A7, A5, A4, A6, A3, A6, A7, A5, A2, A1, A3, A1, A4, A1]
-
 
 traslado = PuntoCartesiano(PolarCartesiano([100, 30]))
 
@@ -85,7 +73,7 @@ F2 = Traslacion(F1, [0, 30]) #Frente superior derecho
 F3 = Traslacion(D3, [0, 30]) #Trasero superior izquierdo
 F4 = Traslacion(D5, [0, 30]) #Frente superior izquierdo
 F5 = Traslacion(PolarF5, PuntoCartesiano(F2)) #Trasero derecho superior
-
+F6 = Traslacion(F5, [0,-30])
 poligono5 = [D5, F1, F2, F5, F3, D3, F3, F4, F2, F1, D5, F4, D5]
 
 #figura 2.2
@@ -104,20 +92,16 @@ poligono6 = [G6, G1, G2, G5, G3, G7, G3, G4, G2, G1, G6, G4, G6, G7, G6]
 
 
 ##################################        CARAS    #################################################
+poligono_1 = [C3,C2,F4,F2,F1,G6,G4,G2,C3,C2,A4,A6,A7,B5,B4,B6,C3]
 
 #Caras superiores
-# Figura 1
-carasuperior1 = [A4, A5, A7, A6]
-#Figura 1,1
-carasuperior2 = [B4, B5, B7, B6]
-#figura 3
-carasuperior3 = [A5, C2, C3, B7]
-#Figura 2.1
+carasuperior123 = [C2, C3, B6, B4, B5, A7, A6, A4]
 carasuperior4 = [F2, F5, F3, F4]
-#firgura 2.2
 carasuperior5 = [G2, G5, G3, G4]
+carasuperior6 = [F6, G7, G6, F1]
 
 #Cara lateral izquierda
+                                #Esto pa que?  NO Se
 #figura1
 caralateral1 = [A1, A2, A5, A4]
 #figura 1.1
@@ -133,9 +117,10 @@ caralateral5 = [D5, D3, F3, F4]
 caralateraltotal = [A1, D1, F3, F4, C2, A4]
 
 #Caras Frontales
-carafrontal1 = [F4,F2,G6,G4,G2,C3,C2]
+carafrontal1 = [F4,F2,F1,G6,G4,G2,C3,C2]
 carafrontal2 = [A4,A6,A3,A1]
 carafrontal3 = [B4,B6,B3,B1]
+carafrontal4 = [A7,B5,B2,A8]
 
 #          x    y   z     Medidas (estas definitivamente no son :v )
 #          F    T   T
@@ -145,14 +130,26 @@ figura3 = [100, 50, 40]
 figura4 = [100, 50, 80]
 
 def Vistas():
-    ventana.fill(NEGRO)
-    pygame.draw.polygon(ventana, AZUL, carasuperior1)
-    pygame.draw.polygon(ventana, AZUL, carasuperior2)
-    pygame.draw.polygon(ventana, AZUL, carasuperior3)
+    #ventana.fill(NEGRO)
+
+    #Frontales
+
+    pygame.draw.polygon(ventana, AMARILLO, carafrontal2)
+    pygame.draw.polygon(ventana, AMARILLO, carafrontal3)
+    pygame.draw.polygon(ventana, AMARILLO, carafrontal4)
+
+    #Superiores
+    pygame.draw.polygon(ventana, AZUL, carasuperior6)
+    pygame.draw.polygon(ventana, AMARILLO, carafrontal1)
+    pygame.draw.polygon(ventana, AZUL, carasuperior123)
     pygame.draw.polygon(ventana, AZUL, carasuperior4)
     pygame.draw.polygon(ventana, AZUL, carasuperior5)
-
     pygame.display.flip()
+
+    #Laterales
+    pygame.draw.polygon(ventana, VERDE, caralateraltotal)
+
+
 
 def Figura():
     ventana.fill(NEGRO)
@@ -161,29 +158,22 @@ def Figura():
     pygame.draw.polygon(ventana, NOSE, poligono1, 2)
 
     #Frigura 2
-    pygame.draw.polygon(ventana, NOSE, poligono2, 2)
+    pygame.draw.polygon(ventana, AMARILLO, poligono2, 2)
 
     #Figura 3
-    pygame.draw.polygon(ventana, NOSE, poligono3, 2)
+    pygame.draw.polygon(ventana, VERDE, poligono3, 2)
 
     #Figura 4
-    pygame.draw.polygon(ventana, NOSE, poligono4, 2)
+    pygame.draw.polygon(ventana, BLANCO, poligono4, 2)#
 
     #figura 2.1
-    pygame.draw.polygon(ventana, NOSE, poligono5, 2)
+    pygame.draw.polygon(ventana, ROJO, poligono5, 2)
 
     #figura 2.2
-    pygame.draw.polygon(ventana, NOSE, poligono6, 2)
+    pygame.draw.polygon(ventana, AZUL, poligono6, 2)
 
-    #caras superiores
-    pygame.draw.polygon(ventana, AZUL, carasuperior1)
-    pygame.draw.polygon(ventana, AZUL, carasuperior2)
-    pygame.draw.polygon(ventana, AZUL, carasuperior3)
-    pygame.draw.polygon(ventana, AZUL, carasuperior4)
-    pygame.draw.polygon(ventana, AZUL, carasuperior5)
+    #pygame.draw.polygon(ventana, NOSE, poligono_1, 2)
 
-    #caras laterales
-    pygame.draw.polygon(ventana, VERDE, caralateraltotal)
 
     pygame.display.flip()
 

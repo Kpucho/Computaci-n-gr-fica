@@ -1,9 +1,9 @@
 import pygame
 import math as np
 
-ORIGEN =  [500, 350]
-ANCHO = 1000
-ALTO = 700
+ANCHO = 500
+ALTO = 500
+ORIGEN =  [ANCHO/2, 2*ALTO/3]
 BLANCO = [150, 150, 150]
 NOSE = [150, 30, 70]
 VERDE = [0, 255, 0]
