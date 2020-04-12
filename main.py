@@ -100,35 +100,65 @@ def dibujarfigura(rotarAng):
     i8 = [30, 0, 40]
     icara = [i1, i2, i3, i4, i5, i6, i7, i8]
 
+    #----------------POLIGONOS DE LA VISTA CONTRARIO LATERAL
 
-    #====================FIGURA================================
-    #ListaCaras
-    #Lista de caras con excepciones
-    #   Es decir: se tiene que dibujar primero para no afectar el dibujo
-    listCarasFrontalExc = [dcara]
-    listCarasLateralExc = [jcara]
-    listCarasSuperiorExc = [hcara]
-    # Las demas listas de caras o poligonos
-    listCarasFrontal = [bcara, ccara, ecara]
-    listCarasLateral = [acara, kcara]
-    listCarasSuperior = [fcara, gcara, icara]
+    l1 = [30,0,0]
+    l2 = [30,80,0]
+    l3 = [30,80,40]
+    l4 = [30,0,40]
+    lcara = [l1, l2, l3, l4]
 
+    m1 = [20, 120, 80]
+    m2 = [20, 160, 80]
+    m3 = [20, 160, 100]
+    m4 = [20, 120, 100]
+    mcara = [m1, m2, m3, m4]
 
+    n1 = [100, 0, 0]
+    n2 = [100, 160, 0]
+    n3 = [100, 160, 100]
+    n4 = [100, 120, 100]
+    n5 = [100, 120, 40]
+    n6 = [100, 0, 40]
+    ncara = [n1, n2, n3, n4, n5, n6]
 
+    #----------------POLIGONOS DE LA VISTA CONTRARIA FRONTAL
+
+    o1 = [0, 160, 0]
+    o2 = [0, 160, 100]
+    o3 = [20, 160, 100]
+    o4 = [20, 160, 80]
+    o5 = [80, 160, 80]
+    o6 = [80, 160, 100]
+    o7 = [100, 160, 100]
+    o8 = [100, 160, 0]
+    ocara = [o1, o2, o3, o4, o5, o6, o7, o8]
 
     #====================DIBUJAR FIGURA ISOMETRICA=============================
-
     #Ang---> vector ang[0], ang[1]
     #   angulos para la perspectiva, ademas se suma el angulo de rotacion por si
     #   se mueve la figura
     ang = [30 + rotarAng, 150 + rotarAng]
 
-    dibujarCaras(ventana, listCarasFrontalExc, AZUL, ang)
-    dibujarCaras(ventana, listCarasLateralExc,  VERDE, ang)
-    dibujarCaras(ventana, listCarasSuperiorExc, AMARILLO, ang)
-    dibujarCaras(ventana, listCarasSuperior, AMARILLO, ang)
-    dibujarCaras(ventana, listCarasFrontal, AZUL, ang)
-    dibujarCaras(ventana, listCarasLateral, VERDE, ang)
+
+    if (rotarAng <= 60 or rotarAng >= 300):
+        listacolores = [AZUL, VERDE, AMARILLO, AMARILLO, AMARILLO, AMARILLO, AZUL, AZUL, AZUL, VERDE, VERDE]
+        listacaras = [dcara, jcara, hcara, fcara, gcara, icara, bcara, ccara, ecara, acara, kcara]
+
+    elif (rotarAng > 60 and rotarAng <= 120):
+        listacolores = [VERDE, AMARILLO, AMARILLO, VERDE, AMARILLO, AMARILLO, ROSADO, VERDE]
+        listacaras = [jcara, icara, hcara, kcara, fcara, gcara, ocara, acara]
+
+    elif (rotarAng > 120 and rotarAng <= 240):
+        listacolores = [ROJO, AMARILLO, AMARILLO, ROJO, AMARILLO, AMARILLO, ROSADO, ROJO]
+        listacaras = [lcara, icara, hcara, mcara, fcara, gcara, ocara, ncara]
+
+    elif (rotarAng > 240):
+        listacolores = [AZUL, AMARILLO, AMARILLO, AMARILLO, AMARILLO, AZUL, AZUL, AZUL, ROJO, ROJO, ROJO]
+        listacaras = [dcara, icara, hcara, fcara, gcara, bcara, ccara, ecara, ncara, mcara, lcara]
+
+    dibujarCaras(ventana, listacaras, listacolores, ang)
+
 
     #====================Vistas===========================
 
@@ -149,8 +179,11 @@ def dibujarfigura(rotarAng):
     dibujarVistaFrontal([dcara, ccara, ecara, acara, jcara, kcara, bcara], rotarAng, colores)
 
 
-# =================FUNCIONES PARA LA VISTA SUPERIOR=============================
 
+
+# =================FUNCIONES PARA LA VISTA SUPERIOR=============================
+#listas de caras organizadas con prioridad
+#los colores van en paralelo a la lista de caras
 #Transforma un poligono superior de coordenadas 3d a 2d
 #listaPuntos ---> lista de puntos del poligono o cara
 #ang ---> es el angulo de rotacion (Por si se mueve la figura, cambia las vistas)
@@ -239,20 +272,22 @@ def dibujarVistaFrontal(caras, ang, colores):
         caranueva = aplanarY(cara, ang)
         pygame.draw.polygon(ventana, colores[i], caranueva)
         pygame.draw.lines(ventana, NEGRO, True, caranueva)
-        i+=1
+        i += 1
 
 
 # Dibuja toda la figura mediante una listas de poligonos o pequenas caras
 # estos poligonos estan conformados por puntos
 # ventana ---> en donde se va a dibujar
 # caras ----> Lista de poligonos ej: listas de Caras Superior
-# color -----> color que identifica esa lista de caras
+# color -----> Lista de colores que identifica esa lista de caras
 # ang -----> vector ang[0], ang[1] (para dar perpectiva a la figura)
 def dibujarCaras(ventana, caras, color, ang):
+    i = 0
     for cara in caras:
         caranueva = listPuntos3dA2d(cara, ang)
-        pygame.draw.polygon(ventana, color, caranueva)
+        pygame.draw.polygon(ventana, color[i], caranueva)
         pygame.draw.lines(ventana, NEGRO, True, caranueva)
+        i += 1
 
 #Transforma una lista de puntos 3d a 2d
 # list3d ---> lista de puntos 3d (Cada uno esta en coordenadas cartesianas)
@@ -279,6 +314,14 @@ def p3dA2d(v, ang):
     y = int(v[0]*np.sin(a)) + int(v[1]*np.sin(b) + v[2])
     return PuntoPantalla([x, y])
 
+def corregirAnguloRotacion(angulo):
+    if(angulo < 0):
+        angulo += 360
+    elif(angulo > 360):
+        angulo = angulo - 360
+
+    return angulo
+
 
 
 if __name__ == '__main__':
@@ -289,7 +332,7 @@ if __name__ == '__main__':
     reloj=pygame.time.Clock()
 
 
-    dibujarfigura(0)
+    dibujarfigura(corregirAnguloRotacion(210))
 
     fin=False
     while not fin:
