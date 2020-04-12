@@ -35,6 +35,7 @@ def Vector(v, pos, orig):
 def Punto(v, pos, color):
     pygame.draw.circle(v, color, pos, 5)
 
+#modificacion --> eliminar variable v innecesaria
 def RotarHorario(pos, a):
     pos = PuntoCartesiano(pos)
     a = np.radians(a)
@@ -63,7 +64,7 @@ def Escalamiento(v, puntos, m):
     ls[2] = PuntoPantalla(ls[2])
     pygame.draw.polygon(v, NOSE, ls, 2)
 
-
+#modificacion para entre solo puntos cartesianos
 def Traslacion(pos, t):
     pos = PuntoCartesiano(pos)
     t = PuntoCartesiano(t)
@@ -99,10 +100,11 @@ def DibujarFiguraRegular(v, X, lados):
 
     pygame.draw.polygon(v, NOSE, puntos, 2)
 
-def PolarPantalla(radio, angulo):
-    a = np.radians(angulo)
-    x = int(radio*np.cos(a))
-    y = int(radio*np.sin(a))
+def PolarCartesiano(p):
+    a = np.radians(p[1])
+    x = int(p[0]*np.cos(a))
+    y = int(p[0]*np.sin(a))
+
     return PuntoPantalla([x, y])
 
 def Polar(r, a):
