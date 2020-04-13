@@ -137,37 +137,43 @@ def dibujarfigura(rotarAng, escalar):
     ocara = [o1, o2, o3, o4, o5, o6, o7, o8]
 
     #====================DIBUJAR FIGURA ISOMETRICA=============================
+    #Angulos de perspectiva
+    # angulo de perspectiva con respecto a X
+    persx = 45
+    # angulo de perspectiva con respecto a Y
+    persy = 135
     #Ang---> vector ang[0], ang[1]
     #   angulos para la perspectiva, ademas se suma el angulo de rotacion por si
     #   se mueve la figura
-    ang = [30 + rotarAng, 150 + rotarAng]
+    ang = [persx + rotarAng, persy + rotarAng]
 
     #Depende del angulo, hay ciertas caras visibles para la figura
-    if (rotarAng <= 60 or rotarAng >= 300):
+    # 300 ---> 60
+    if (rotarAng <= (90 - persx) or rotarAng >= (270 + 180 - persy)):
         listacolores = [AZUL, VERDE, AMARILLO, AMARILLO, AMARILLO, AMARILLO, AZUL, AZUL, AZUL, VERDE, VERDE]
         listacaras = [dcara, jcara, hcara, fcara, gcara, icara, bcara, ccara, ecara, acara, kcara]
-
-    elif (rotarAng > 60 and rotarAng <= 120):
+    # 60--->120
+    elif (rotarAng > (90 - persx) and rotarAng <= (90 + 180 - persy)):
         listacolores = [VERDE, AMARILLO, AMARILLO, VERDE, AMARILLO, AMARILLO, ROSADO, VERDE]
         listacaras = [jcara, icara, hcara, kcara, fcara, gcara, ocara, acara]
-
-    elif (rotarAng > 120 and rotarAng <= 240):
+    # 120 ---> 240
+    elif (rotarAng > (90 + 180 - persy) and rotarAng <= (270 -persx)):
         listacolores = [ROJO, AMARILLO, AMARILLO, ROJO, AMARILLO, AMARILLO, ROSADO, ROJO]
         listacaras = [lcara, icara, hcara, mcara, fcara, gcara, ocara, ncara]
-
-    elif (rotarAng > 240 and rotarAng <300):
+    # 240 --->300
+    elif (rotarAng > (270 -persx) and rotarAng < (270 + 180 - persy)):
         listacolores = [AZUL, AMARILLO, AMARILLO, AMARILLO, AMARILLO, AZUL, AZUL, AZUL, ROJO, ROJO, ROJO]
         listacaras = [dcara, icara, hcara, fcara, gcara, bcara, ccara, ecara, ncara, mcara, lcara]
 
     #dibujar Plano X
-    pygame.draw.line(ventana, Cplano, PolarPantalla(250, 210), PolarPantalla(250, 30))
+    pygame.draw.line(ventana, Cplano, PolarPantalla(250, (180 + persx)), PolarPantalla(250, persx))
     #dibujar plano Y
-    pygame.draw.line(ventana, Cplano, PolarPantalla(250, 150), PolarPantalla(250, -30))
+    pygame.draw.line(ventana, Cplano, PolarPantalla(250, persy), PolarPantalla(250, 180 + persy))
 
     dibujarCaras(ventana, listacaras, listacolores, ang, escalar)
 
     #dibujar plano Z
-    if(rotarAng >= 90 and rotarAng <= 270):
+    if(rotarAng >= persy and rotarAng <= 270 - persx):
         pygame.draw.line(ventana, Cplano, PuntoPantalla([0, 40]), PuntoPantalla([0, 250]))
     else:
         pygame.draw.line(ventana, Cplano,  PuntoPantalla([0,0]), PuntoPantalla([0, 250]))
@@ -366,6 +372,7 @@ if __name__ == '__main__':
 
     ang = 0
     escalar = 1
+    # DEATH = False
 
     fin=False
     while not fin:
@@ -392,25 +399,25 @@ if __name__ == '__main__':
                     else:
                         Cpantalla = BLANCO
                         Cplano = NEGRO
-                if event.key == pygame.K_LALT or event.key == pygame.K_RALT:
-                    if DEATH == True:
-                        DEATH = False
-                    else:
-                        DEATH = True
+                # if event.key == pygame.K_LALT or event.key == pygame.K_RALT:
+                #     if DEATH == True:
+                #         DEATH = False
+                #     else:
+                #         DEATH = True
 
 
             #control
-            if DEATH == True:
-                if Cpantalla == BLANCO:
-                    Cpantalla = NEGRO
-                    Cplano = BLANCO
-                else:
-                    Cpantalla = BLANCO
-                    Cplano = NEGRO
+            # if DEATH == True:
+            #     if Cpantalla == BLANCO:
+            #         Cpantalla = NEGRO
+            #         Cplano = BLANCO
+            #  else:
+            #         Cpantalla = BLANCO
+            #         Cplano = NEGRO
 
             ang = corregirAnguloRotacion(ang)
             #Refresco
             ventana.fill(Cpantalla)
             dibujarfigura(ang, escalar)
             pygame.display.flip()
-            reloj.tick(100)
+            reloj.tick(60)
