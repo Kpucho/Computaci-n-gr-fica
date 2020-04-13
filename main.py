@@ -160,9 +160,9 @@ def dibujarfigura(rotarAng, escalar):
         listacaras = [dcara, icara, hcara, fcara, gcara, bcara, ccara, ecara, ncara, mcara, lcara]
 
     #dibujar Plano X
-    pygame.draw.line(ventana, Cplano, PolarPantalla(3*X_Figura/2, (180 + persx)), PolarPantalla(3*X_Figura/2, persx))
+    pygame.draw.line(ventana, Cplano, PolarPantalla(2*X_Figura*escalar, (180 + persx)), PolarPantalla(2*X_Figura*escalar, persx))
     #dibujar plano Y
-    pygame.draw.line(ventana, Cplano, PolarPantalla(3*Y_Figura/2, persy), PolarPantalla(3*Y_Figura/2, 180 + persy))
+    pygame.draw.line(ventana, Cplano, PolarPantalla(3*Y_Figura*escalar/2, persy), PolarPantalla(3*Y_Figura*escalar/2, 180 + persy))
 
     dibujarCaras(ventana, listacaras, listacolores, ang, escalar)
 
