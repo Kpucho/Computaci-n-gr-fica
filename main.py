@@ -5,7 +5,7 @@ from plano import *
 
 # rotarAng ---> int
 #   angulo de cuanto se mueve la figura con respecto a su posicion original
-def dibujarfigura(rotarAng):
+def dibujarfigura(rotarAng, escalar):
 
     #-----------------POLIGONOS DE LA VISTA LATERAL O PERFIL
     #Define los puntos de cada poligono o cara
@@ -140,7 +140,7 @@ def dibujarfigura(rotarAng):
     #   se mueve la figura
     ang = [30 + rotarAng, 150 + rotarAng]
 
-
+    #Depende del angulo, hay ciertas caras visibles para la figura
     if (rotarAng <= 60 or rotarAng >= 300):
         listacolores = [AZUL, VERDE, AMARILLO, AMARILLO, AMARILLO, AMARILLO, AZUL, AZUL, AZUL, VERDE, VERDE]
         listacaras = [dcara, jcara, hcara, fcara, gcara, icara, bcara, ccara, ecara, acara, kcara]
@@ -153,11 +153,11 @@ def dibujarfigura(rotarAng):
         listacolores = [ROJO, AMARILLO, AMARILLO, ROJO, AMARILLO, AMARILLO, ROSADO, ROJO]
         listacaras = [lcara, icara, hcara, mcara, fcara, gcara, ocara, ncara]
 
-    elif (rotarAng > 240):
+    elif (rotarAng > 240 and rotarAng <300):
         listacolores = [AZUL, AMARILLO, AMARILLO, AMARILLO, AMARILLO, AZUL, AZUL, AZUL, ROJO, ROJO, ROJO]
         listacaras = [dcara, icara, hcara, fcara, gcara, bcara, ccara, ecara, ncara, mcara, lcara]
 
-    dibujarCaras(ventana, listacaras, listacolores, ang)
+    dibujarCaras(ventana, listacaras, listacolores, ang, escalar)
 
 
     #====================Vistas===========================
@@ -166,18 +166,27 @@ def dibujarfigura(rotarAng):
     #No importa el orden de la lista
     dibujarVistaSuperior([fcara, gcara, icara, hcara], rotarAng)
 
-    #VISTA LATERAL
-    #listas de caras organizadas con prioridad
-    #los colores van en paralelo a la lista de caras
-    colores = [VERDE, VERDE, AZUL, AZUL, AZUL, AZUL, VERDE]
-    dibujarVistaLateral([kcara, jcara, dcara, ecara, bcara, ccara, acara], rotarAng, colores)
-
-    #VISTA FRONTAL
-    #listas de caras organizadas con prioridad
-    #los colores van en paralelo a la lista de caras
-    colores =[AZUL, AZUL, AZUL, VERDE, VERDE, VERDE, AZUL]
-    dibujarVistaFrontal([dcara, ccara, ecara, acara, jcara, kcara, bcara], rotarAng, colores)
-
+    #Depende del angulo, hay ciertas caras visibles para cada vista
+    if (rotarAng >= 0 and rotarAng <= 90):
+        colores = [VERDE, VERDE, ROSADO]
+        dibujarVistaLateral([kcara, acara, ocara], rotarAng, colores)
+        colores = [VERDE, VERDE, AZUL, AZUL, AZUL, AZUL, VERDE]
+        dibujarVistaFrontal([kcara, jcara, dcara, ecara, bcara, ccara, acara], rotarAng, colores)
+    elif (rotarAng > 90 and rotarAng <= 180):
+        colores = [ROJO, ROJO, ROSADO]
+        dibujarVistaLateral([mcara, ncara, ocara], rotarAng, colores)
+        colores = [VERDE, VERDE, ROSADO]
+        dibujarVistaFrontal([kcara, acara, ocara], rotarAng, colores)
+    elif (rotarAng > 180 and rotarAng <= 270):
+        colores = [ROJO, ROJO, AZUL, AZUL, AZUL, AZUL, ROJO]
+        dibujarVistaLateral([mcara, lcara, dcara, ecara, bcara, ccara, ncara], rotarAng, colores)
+        colores = [ROJO, ROJO, ROSADO]
+        dibujarVistaFrontal([mcara, ncara, ocara], rotarAng, colores)
+    elif (rotarAng > 270 and rotarAng < 360):
+        colores = [VERDE, VERDE, AZUL, AZUL, AZUL, AZUL, VERDE]
+        dibujarVistaLateral([kcara, jcara, dcara, ecara, bcara, ccara, acara], rotarAng, colores)
+        colores = [ROJO, ROJO, AZUL, AZUL, AZUL, AZUL, ROJO]
+        dibujarVistaFrontal([mcara, lcara, dcara, ecara, bcara, ccara, ncara], rotarAng, colores)
 
 
 
@@ -225,7 +234,7 @@ def aplanarX(listaPuntos, ang):
         x = int(punto[1]*np.cos(a)) - int(punto[0]*np.sin(b))
         # Y = punto[2] o Y = z, ya que la altura no se ve afectada
         puntonuevo = PuntoPantalla([x, punto[2]])
-        puntonuevo = Traslacion(puntonuevo, [910, 500])
+        puntonuevo = Traslacion(puntonuevo, [820, 500])
         listanueva.append(puntonuevo)
     return listanueva
 
@@ -256,7 +265,7 @@ def aplanarY(listaPuntos, ang):
     for punto in listaPuntos:
         x = int(punto[0]*np.cos(a)) - int(punto[1]*np.sin(a))
         puntonuevo = PuntoPantalla([x, punto[2]])
-        puntonuevo = Traslacion(puntonuevo, [750, 650])
+        puntonuevo = Traslacion(puntonuevo, [820, 620])
         listanueva.append(puntonuevo)
     return listanueva
 
@@ -281,10 +290,12 @@ def dibujarVistaFrontal(caras, ang, colores):
 # caras ----> Lista de poligonos ej: listas de Caras Superior
 # color -----> Lista de colores que identifica esa lista de caras
 # ang -----> vector ang[0], ang[1] (para dar perpectiva a la figura)
-def dibujarCaras(ventana, caras, color, ang):
+# escalar----> incrementa o decrementa el tamano de la figura
+def dibujarCaras(ventana, caras, color, ang, escalar):
     i = 0
     for cara in caras:
         caranueva = listPuntos3dA2d(cara, ang)
+        caranueva = escalarLista(caranueva, escalar)
         pygame.draw.polygon(ventana, color[i], caranueva)
         pygame.draw.lines(ventana, NEGRO, True, caranueva)
         i += 1
@@ -314,12 +325,23 @@ def p3dA2d(v, ang):
     y = int(v[0]*np.sin(a)) + int(v[1]*np.sin(b) + v[2])
     return PuntoPantalla([x, y])
 
+#Escala una lista de puntos punto pantalla
+#ListaPuntos ----> lista puntos de coordenadas pantalla
+#Escalar ----> numero con el que se multiplica cada punto
+#return ---> retorna una lista de puntos en coordenadas pantalla ya escalados
+
+def escalarLista(listaPuntos, escalar):
+    listanueva = []
+    for punto in listaPuntos:
+        punto = Escalar(punto, escalar)
+        listanueva.append(punto)
+    return listanueva
+
 def corregirAnguloRotacion(angulo):
     if(angulo < 0):
         angulo += 360
-    elif(angulo > 360):
+    elif(angulo >= 360):
         angulo = angulo - 360
-
     return angulo
 
 
@@ -331,8 +353,8 @@ if __name__ == '__main__':
     pygame.display.set_caption("Puto el que lo lea")
     reloj=pygame.time.Clock()
 
-
-    dibujarfigura(corregirAnguloRotacion(210))
+    ang = 0
+    escalar = 1
 
     fin=False
     while not fin:
@@ -340,10 +362,21 @@ if __name__ == '__main__':
             #Gestion de eventos
             if event.type == pygame.QUIT:
                 fin=True
-
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 5:
+                    ang += 10
+                if event.button == 4:
+                    ang -= 10
+                if event.button == 1:
+                    escalar += 0.1
+                if event.button == 2:
+                    escalar = 1
+                if event.button == 3:
+                    escalar -= 0.1
             #control
-
+            ang = corregirAnguloRotacion(ang)
             #Refresco
-            # ventana.fill(NEGRO)
+            ventana.fill(NEGRO)
+            dibujarfigura(ang, escalar)
             pygame.display.flip()
             reloj.tick(60)

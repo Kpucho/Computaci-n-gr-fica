@@ -72,12 +72,13 @@ def Traslacion(pos, t):
     y = pos[1] + t[1]
     return PuntoPantalla([x, y])
 
+#modificacion para que retorne en puntopantalla
 def Escalar(punto, valor):
     punto = PuntoCartesiano(punto);
     punto[0] = punto[0] * valor
     punto[1] = punto[1] * valor
 
-    return punto
+    return PuntoPantalla(punto)
 
 def DibujarEquilatero(v, X):
     Y = RotarAntiHorario(v, X, 120)
