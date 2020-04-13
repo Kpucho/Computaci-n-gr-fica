@@ -168,9 +168,9 @@ def dibujarfigura(rotarAng, escalar):
 
     #dibujar plano Z
     if(rotarAng >= persy and rotarAng <= 270 - persx):
-        pygame.draw.line(ventana, Cplano, PuntoPantalla([0, 2*Z_Figura*escalar/5]), PuntoPantalla([0, 250]))
+        pygame.draw.line(ventana, Cplano, PuntoPantalla([0, 2*Z_Figura*escalar/5]), PuntoPantalla([0, 3*Z_Figura/2]))
     else:
-        pygame.draw.line(ventana, Cplano,  PuntoPantalla([0,0]), PuntoPantalla([0, 250]))
+        pygame.draw.line(ventana, Cplano,  PuntoPantalla([0,0]), PuntoPantalla([0, 3*Z_Figura/2]))
 
     #====================Vistas===========================
 
@@ -355,7 +355,7 @@ def corregirAnguloRotacion(angulo):
 
 
 if __name__ == '__main__':
-    pygame.time.set_timer(Itstime, 1000)
+    pygame.time.set_timer(Itstime, 600)
     pygame.init()
     ventana=pygame.display.set_mode([ANCHO,ALTO])
     ventana.fill(Cpantalla)
