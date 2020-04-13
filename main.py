@@ -49,17 +49,17 @@ if __name__ == '__main__':
                         Cpantalla = BLANCO
                         Cplano = NEGRO
 
-            ln = []
-            Angulo+= i
-            if Cestrella == AMARILLO:
-                Cestrella = ROJO
-            else:
-                Cestrella = AMARILLO
-            for punto in lf:
-                aux = RotarHorario(punto, Angulo)
-                ln.append(aux)
-            ventana.fill(Cpantalla)
-            pygame.draw.circle(ventana, Cplano, ORIGEN, L, 1)
-            pygame.draw.polygon(ventana, Cestrella, ln,TLine)
-            pygame.display.flip()
-            reloj.tick(30)
+        ln = []
+        Angulo+= i
+        if Cestrella == AMARILLO:
+            Cestrella = ROJO
+        else:
+            Cestrella = AMARILLO
+        for punto in lf:
+            aux = RotarHorario(punto, Angulo)
+            ln.append(aux)
+        ventana.fill(Cpantalla)
+        pygame.draw.circle(ventana, Cplano, ORIGEN, L, 1)
+        pygame.draw.polygon(ventana, Cestrella, ln,TLine)
+        pygame.display.flip()
+        reloj.tick(30)
