@@ -5,7 +5,6 @@ import math as np
 ANCHO = 1000
 ALTO = 700
 ORIGEN =  [ANCHO/2, ALTO/2]
-BLANCO = [150, 150, 150]
 NOSE = [150, 30, 70] #Color
 NEGRO = [0, 0, 0]
 VERDE = [0, 255, 0]
@@ -101,11 +100,10 @@ def DibujarFiguraRegular(v, X, lados):
 
     pygame.draw.polygon(v, NOSE, puntos, 2)
 
-def PolarCartesiano(p):
-    a = np.radians(p[1])
-    x = int(p[0]*np.cos(a))
-    y = int(p[0]*np.sin(a))
-
+def PolarPantalla(radio, ang):
+    a = np.radians(ang)
+    x = int(radio*np.cos(a))
+    y = int(radio*np.sin(a))
     return PuntoPantalla([x, y])
 
 def Polar(r, a):

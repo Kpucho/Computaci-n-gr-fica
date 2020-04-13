@@ -157,8 +157,18 @@ def dibujarfigura(rotarAng, escalar):
         listacolores = [AZUL, AMARILLO, AMARILLO, AMARILLO, AMARILLO, AZUL, AZUL, AZUL, ROJO, ROJO, ROJO]
         listacaras = [dcara, icara, hcara, fcara, gcara, bcara, ccara, ecara, ncara, mcara, lcara]
 
+    #dibujar Plano X
+    pygame.draw.line(ventana, BLANCO, PolarPantalla(250, 210), PolarPantalla(250, 30))
+    #dibujar plano Y
+    pygame.draw.line(ventana, BLANCO, PolarPantalla(250, 150), PolarPantalla(250, -30))
+
     dibujarCaras(ventana, listacaras, listacolores, ang, escalar)
 
+    #dibujar plano Z
+    if(rotarAng >= 90 and rotarAng <= 270):
+        pygame.draw.line(ventana, BLANCO, PuntoPantalla([0, 40]), PuntoPantalla([0, 250]))
+    else:
+        pygame.draw.line(ventana, BLANCO,  PuntoPantalla([0,0]), PuntoPantalla([0, 250]))
 
     #====================Vistas===========================
 
@@ -343,7 +353,6 @@ def corregirAnguloRotacion(angulo):
     elif(angulo >= 360):
         angulo = angulo - 360
     return angulo
-
 
 
 if __name__ == '__main__':
