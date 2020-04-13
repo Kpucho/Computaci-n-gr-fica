@@ -11,6 +11,7 @@ Angulo = 0
 lf = Estrella_7_puntas(L, Origen)
 i = 0
 reloj=pygame.time.Clock()
+pygame.time.set_timer(Itstime, 600)
 pygame.draw.polygon(ventana, Cplano, lf,1)
 if __name__ == '__main__':
     pygame.display.flip()
@@ -34,13 +35,22 @@ if __name__ == '__main__':
                             Cpantalla = NEGRO
                         else:
                             Cpantalla = BLANCO
+                if event.key == pygame.K_RALT or event.key == pygame.K_LALT:
+                    if DEATH == True:
+                        DEATH = False
+                    else:
+                        DEATH = True
+            if event.type ==Itstime:
+                if DEATH == True:
+                    if Cpantalla == BLANCO:
+                        Cpantalla = NEGRO
+                        Cplano = BLANCO
+                    else:
+                        Cpantalla = BLANCO
+                        Cplano = NEGRO
 
             ln = []
             Angulo+= i
-            if Cplano == NEGRO:
-                Cplano = BLANCO
-            else:
-                Cplano = NEGRO
             if Cestrella == AMARILLO:
                 Cestrella = ROJO
             else:

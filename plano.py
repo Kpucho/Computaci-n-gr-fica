@@ -15,7 +15,8 @@ Cpantalla = BLANCO
 Cplano = NEGRO
 Cestrella = ROJO
 TLine = 2
-
+Itstime = pygame.USEREVENT
+DEATH = False
 def Dibujar(v, origen):
     pygame.draw.line(v, BLANCO, [origen[0], 0], [origen[0], ALTO], 1)
     pygame.draw.line(v, BLANCO, [0, origen[1]], [ANCHO, origen[1]], 1)
