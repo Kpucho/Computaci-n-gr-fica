@@ -21,6 +21,7 @@ Cplano = NEGRO
 VistaSuperior = [710, 185]
 VistaLateral = [810, 460]
 VistaFrontal = [710, 610]
+Itstime = pygame.USEREVENT
 DEATH = False
 
 def Dibujar(v, origen):

@@ -160,9 +160,9 @@ def dibujarfigura(rotarAng, escalar):
         listacaras = [dcara, icara, hcara, fcara, gcara, bcara, ccara, ecara, ncara, mcara, lcara]
 
     #dibujar Plano X
-    pygame.draw.line(ventana, Cplano, PolarPantalla(250, (180 + persx)), PolarPantalla(250, persx))
+    pygame.draw.line(ventana, Cplano, PolarPantalla(3*X_Figura/2, (180 + persx)), PolarPantalla(3*X_Figura/2, persx))
     #dibujar plano Y
-    pygame.draw.line(ventana, Cplano, PolarPantalla(250, persy), PolarPantalla(250, 180 + persy))
+    pygame.draw.line(ventana, Cplano, PolarPantalla(3*Y_Figura/2, persy), PolarPantalla(3*Y_Figura/2, 180 + persy))
 
     dibujarCaras(ventana, listacaras, listacolores, ang, escalar)
 
@@ -213,7 +213,6 @@ def aplanarZ(listaPuntos, ang):
     listanueva = []
     for punto in listaPuntos:
         #rotar figura con un punto fijo por que la vista superior nunca cambia
-        #aprovechar esa ventaja
         puntonuevo = RotarAntiHorario(PuntoPantalla([punto[0], punto[1]]), ang)
         puntonuevo = Traslacion(puntonuevo, VistaSuperior)
         listanueva.append(puntonuevo)
@@ -245,7 +244,6 @@ def aplanarX(listaPuntos, ang):
     for punto in listaPuntos:
         #Transformar la coordenada y, x en una sola, que seria x
         x = int(punto[1]*np.cos(a)) - int(punto[0]*np.sin(b))
-        # Y = punto[2] o Y = z, ya que la altura no se ve afectada
         puntonuevo = PuntoPantalla([x, punto[2]])
         puntonuevo = Traslacion(puntonuevo, VistaLateral)
         listanueva.append(puntonuevo)
@@ -314,9 +312,9 @@ def dibujarCaras(ventana, caras, color, ang, escalar):
 #Transforma una lista de puntos 3d a 2d
 # list3d ---> lista de puntos 3d (Cada uno esta en coordenadas cartesianas)
 # ang ----> es un vector ang[0] y ang[1], Es para intentar darle perspectiva
-#   ang[0] ----> este suele ser el de 30 + anguloRotacion
-#   ang[1] ----> este suele ser el de 150 o 135 (ustedes eligen) + anguloRotacion
-#     Sin embargo estos angulos se definen justo antes de llamar la funcion dibujarcaras
+#   ang[0] ----> este suele ser el de 45 + anguloRotacion
+#   ang[1] ----> este suele ser el de 135 + anguloRotacion
+#   Sin embargo estos angulos se definen justo antes de llamar la funcion dibujarcaras
 # return ---> retorna una lista de puntos 2d en coordenadas pantalla
 def listPuntos3dA2d(list3d, ang):
     list2d = []
@@ -357,11 +355,11 @@ def corregirAnguloRotacion(angulo):
 
 
 if __name__ == '__main__':
-
+    pygame.time.set_timer(Itstime, 1000)
     pygame.init()
     ventana=pygame.display.set_mode([ANCHO,ALTO])
     ventana.fill(Cpantalla)
-    pygame.display.set_caption("Puto el que lo lea")
+    pygame.display.set_caption("Pillese esta rikura")
     reloj=pygame.time.Clock()
 
     ang = 0
@@ -393,21 +391,24 @@ if __name__ == '__main__':
                     else:
                         Cpantalla = BLANCO
                         Cplano = NEGRO
-                # if event.key == pygame.K_LALT or event.key == pygame.K_RALT:
-                #     if DEATH == True:
-                #         DEATH = False
-                #     else:
-                #         DEATH = True
+                if event.key == pygame.K_RALT or event.key == pygame.K_LALT:
+                    if DEATH == True:
+                        DEATH = False
+                    else:
+                        DEATH = True
+            if event.type ==Itstime:
+                if DEATH == True:
+                    if Cpantalla == BLANCO:
+                        Cpantalla = NEGRO
+                        Cplano = BLANCO
+                    else:
+                        Cpantalla = BLANCO
+                        Cplano = NEGRO
+
 
 
             #control
-            # if DEATH == True:
-            #     if Cpantalla == BLANCO:
-            #         Cpantalla = NEGRO
-            #         Cplano = BLANCO
-            #  else:
-            #         Cpantalla = BLANCO
-            #         Cplano = NEGRO
+            #
 
             ang = corregirAnguloRotacion(ang)
             #Refresco
