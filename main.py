@@ -168,7 +168,7 @@ def dibujarfigura(rotarAng, escalar):
 
     #dibujar plano Z
     if(rotarAng >= persy and rotarAng <= 270 - persx):
-        pygame.draw.line(ventana, Cplano, PuntoPantalla([0, 40]), PuntoPantalla([0, 250]))
+        pygame.draw.line(ventana, Cplano, PuntoPantalla([0, 2*Z_Figura*escalar/5]), PuntoPantalla([0, 250]))
     else:
         pygame.draw.line(ventana, Cplano,  PuntoPantalla([0,0]), PuntoPantalla([0, 250]))
 
