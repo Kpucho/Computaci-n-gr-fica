@@ -4,7 +4,7 @@ import math as np
 
 ANCHO = 1000
 ALTO = 700
-ORIGEN =  [ANCHO/2, ALTO/2]
+ORIGEN =  [ANCHO/4, ALTO/2]
 NOSE = [150, 30, 70] #Color
 NEGRO = [0, 0, 0]
 VERDE = [0, 255, 0]
@@ -13,6 +13,10 @@ AMARILLO = [255, 255, 0]
 BLANCO = [255, 255, 255]
 AZUL = [0, 0, 255]
 ROSADO = [255, 0, 255]
+VistaSuperior = [710, 185]
+VistaLateral = [810, 460]
+VistaFrontal = [710, 610]
+DEATH = False
 
 def Dibujar(v, origen):
     pygame.draw.line(v, BLANCO, [origen[0], 0], [origen[0], ALTO], 1)

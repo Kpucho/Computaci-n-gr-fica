@@ -2,14 +2,16 @@ import pygame
 from plano import *
 
 
+Cpantalla = BLANCO
+Cplano = NEGRO
 
 # rotarAng ---> int
 #   angulo de cuanto se mueve la figura con respecto a su posicion original
 def dibujarfigura(rotarAng, escalar):
-
     #-----------------POLIGONOS DE LA VISTA LATERAL O PERFIL
     #Define los puntos de cada poligono o cara
     #figura L
+
     a1 = [0, 0, 0]
     a2 = [0, 160, 0]
     a3 = [0, 160, 100]
@@ -158,17 +160,17 @@ def dibujarfigura(rotarAng, escalar):
         listacaras = [dcara, icara, hcara, fcara, gcara, bcara, ccara, ecara, ncara, mcara, lcara]
 
     #dibujar Plano X
-    pygame.draw.line(ventana, BLANCO, PolarPantalla(250, 210), PolarPantalla(250, 30))
+    pygame.draw.line(ventana, Cplano, PolarPantalla(250, 210), PolarPantalla(250, 30))
     #dibujar plano Y
-    pygame.draw.line(ventana, BLANCO, PolarPantalla(250, 150), PolarPantalla(250, -30))
+    pygame.draw.line(ventana, Cplano, PolarPantalla(250, 150), PolarPantalla(250, -30))
 
     dibujarCaras(ventana, listacaras, listacolores, ang, escalar)
 
     #dibujar plano Z
     if(rotarAng >= 90 and rotarAng <= 270):
-        pygame.draw.line(ventana, BLANCO, PuntoPantalla([0, 40]), PuntoPantalla([0, 250]))
+        pygame.draw.line(ventana, Cplano, PuntoPantalla([0, 40]), PuntoPantalla([0, 250]))
     else:
-        pygame.draw.line(ventana, BLANCO,  PuntoPantalla([0,0]), PuntoPantalla([0, 250]))
+        pygame.draw.line(ventana, Cplano,  PuntoPantalla([0,0]), PuntoPantalla([0, 250]))
 
     #====================Vistas===========================
 
@@ -213,9 +215,10 @@ def aplanarZ(listaPuntos, ang):
         #rotar figura con un punto fijo por que la vista superior nunca cambia
         #aprovechar esa ventaja
         puntonuevo = RotarAntiHorario(PuntoPantalla([punto[0], punto[1]]), ang)
-        puntonuevo = Traslacion(puntonuevo, [750, 210])
+        puntonuevo = Traslacion(puntonuevo, VistaSuperior)
         listanueva.append(puntonuevo)
     return listanueva
+
 
 #Dibuja la caras superiores
 #caras ---> lista de poligonos o caras superiores
@@ -244,10 +247,9 @@ def aplanarX(listaPuntos, ang):
         x = int(punto[1]*np.cos(a)) - int(punto[0]*np.sin(b))
         # Y = punto[2] o Y = z, ya que la altura no se ve afectada
         puntonuevo = PuntoPantalla([x, punto[2]])
-        puntonuevo = Traslacion(puntonuevo, [820, 500])
+        puntonuevo = Traslacion(puntonuevo, VistaLateral)
         listanueva.append(puntonuevo)
     return listanueva
-
 #Dibuja la caras que se ven en la vista lateral
 #caras ---> lista de poligonos o caras tanto laterales y superiores
 #       Estas estan organizadas en un especifico para que quede bien dibujado
@@ -275,10 +277,9 @@ def aplanarY(listaPuntos, ang):
     for punto in listaPuntos:
         x = int(punto[0]*np.cos(a)) - int(punto[1]*np.sin(a))
         puntonuevo = PuntoPantalla([x, punto[2]])
-        puntonuevo = Traslacion(puntonuevo, [820, 620])
+        puntonuevo = Traslacion(puntonuevo, VistaFrontal)
         listanueva.append(puntonuevo)
     return listanueva
-
 
 #Dibuja la caras que se ven en la vista lateral
 #caras ---> lista de poligonos o caras tanto laterales y superiores
@@ -359,6 +360,7 @@ if __name__ == '__main__':
 
     pygame.init()
     ventana=pygame.display.set_mode([ANCHO,ALTO])
+    ventana.fill(Cpantalla)
     pygame.display.set_caption("Puto el que lo lea")
     reloj=pygame.time.Clock()
 
@@ -382,10 +384,33 @@ if __name__ == '__main__':
                     escalar = 1
                 if event.button == 3:
                     escalar -= 0.1
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    if Cpantalla == BLANCO:
+                        Cpantalla = NEGRO
+                        Cplano = BLANCO
+                    else:
+                        Cpantalla = BLANCO
+                        Cplano = NEGRO
+                if event.key == pygame.K_LALT or event.key == pygame.K_RALT:
+                    if DEATH == True:
+                        DEATH = False
+                    else:
+                        DEATH = True
+
+
             #control
+            if DEATH == True:
+                if Cpantalla == BLANCO:
+                    Cpantalla = NEGRO
+                    Cplano = BLANCO
+                else:
+                    Cpantalla = BLANCO
+                    Cplano = NEGRO
+
             ang = corregirAnguloRotacion(ang)
             #Refresco
-            ventana.fill(NEGRO)
+            ventana.fill(Cpantalla)
             dibujarfigura(ang, escalar)
             pygame.display.flip()
-            reloj.tick(60)
+            reloj.tick(100)
