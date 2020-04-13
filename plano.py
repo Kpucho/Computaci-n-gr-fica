@@ -4,14 +4,16 @@ import math as np
 ORIGEN =  [500, 350]
 ANCHO = 1000
 ALTO = 700
-BLANCO = [150, 150, 150]
+BLANCO = [250, 250, 250]
 NOSE = [150, 30, 70]
 VERDE = [0, 255, 0]
 AZUL = [0, 0, 255]
-AMARILLO = [0, 255, 255]
+AMARILLO = [255, 255,0]
 ROJO = [255,0,0]
 NEGRO = [0,0,0]
-
+Cpantalla = BLANCO
+Cplano = NEGRO
+Cestrella = ROJO
 
 def Dibujar(v, origen):
     pygame.draw.line(v, BLANCO, [origen[0], 0], [origen[0], ALTO], 1)
