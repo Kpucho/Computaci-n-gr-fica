@@ -14,6 +14,7 @@ NEGRO = [0,0,0]
 Cpantalla = BLANCO
 Cplano = NEGRO
 Cestrella = ROJO
+TLine = 2
 
 def Dibujar(v, origen):
     pygame.draw.line(v, BLANCO, [origen[0], 0], [origen[0], ALTO], 1)
