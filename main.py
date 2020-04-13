@@ -1,10 +1,6 @@
 import pygame
 from plano import *
 
-
-Cpantalla = BLANCO
-Cplano = NEGRO
-
 # rotarAng ---> int
 #   angulo de cuanto se mueve la figura con respecto a su posicion original
 def dibujarfigura(rotarAng, escalar):
@@ -13,127 +9,125 @@ def dibujarfigura(rotarAng, escalar):
     #figura L
 
     a1 = [0, 0, 0]
-    a2 = [0, 160, 0]
-    a3 = [0, 160, 100]
-    a4 = [0, 120, 100]
-    a5 = [0, 120, 40]
-    a6 = [0, 0, 40]
+    a2 = [0, Y_Figura, 0]
+    a3 = [0, Y_Figura, Z_Figura]
+    a4 = [0, 3*Y_Figura/4, Z_Figura]
+    a5 = [0, 3*Y_Figura/4, 2*Z_Figura/5]
+    a6 = [0, 0, 2*Z_Figura/5]
 
     #Define la lista de puntos que conforma el poligono o cara
-    acara = [a1, a2, a3, a4, a5, a6]
-
-    #mitad grande
-    j1 = [70, 0, 0]
-    j2 = [70, 80, 0]
-    j3 = [70, 80, 40]
-    j4 = [70, 0, 40]
+    acara = [a1, a2, a3, a4, a5, a6] #mitad grande
+    j1 = [7*X_Figura/10, 0, 0]
+    j2 = [7*X_Figura/10, Y_Figura/2, 0]
+    j3 = [7*X_Figura/10, Y_Figura/2, 2*Z_Figura/5]
+    j4 = [7*X_Figura/10, 0, 2*Z_Figura/5]
     jcara = [j1, j2, j3, j4]
 
     #mitad pequenita
-    k1 = [80, 120, 80]
-    k2 = [80, 160, 80]
-    k3 = [80, 160, 100]
-    k4 = [80, 120, 100]
+    k1 = [4*X_Figura/5, 3*Y_Figura/4, 4*Z_Figura/5]
+    k2 = [4*X_Figura/5, Y_Figura, 4*Z_Figura/5]
+    k3 = [4*X_Figura/5, Y_Figura, Z_Figura]
+    k4 = [4*X_Figura/5, 3*Y_Figura/4, Z_Figura]
     kcara = [k1, k2, k3, k4]
 
     #----------------POLIGONOS DE LA VISTA FRONTAL O ALZADO
     #figura 1.1 pequenita
     b1 = [0, 0, 0]
-    b2 = [0, 0, 40]
-    b3 = [30, 0, 40]
-    b4 = [30, 0, 0]
+    b2 = [0, 0, 2*Z_Figura/5]
+    b3 = [3*X_Figura/10, 0, 2*Z_Figura/5]
+    b4 = [3*X_Figura/10, 0, 0]
     bcara = [b1, b2, b3, b4]
 
     #figura 1.2
-    c1 = [70, 0, 0]
-    c2 = [70, 0, 40]
-    c3 = [100, 0, 40]
-    c4 = [100, 0, 0]
+    c1 = [7*X_Figura/10, 0, 0]
+    c2 = [7*X_Figura/10, 0, 2*Z_Figura/5]
+    c3 = [X_Figura, 0, 2*Z_Figura/5]
+    c4 = [X_Figura, 0, 0]
     ccara = [c1, c2, c3, c4]
 
     #figura Centro en medio de las figuras 1.1 y 1.2
-    d1 = [30, 80, 0]
-    d2 = [30, 80, 40]
-    d3 = [70, 80, 40]
-    d4 = [70, 80, 0]
+    d1 = [3*X_Figura/10, Y_Figura/2, 0]
+    d2 = [3*X_Figura/10, Y_Figura/2, 2*Z_Figura/5]
+    d3 = [7*X_Figura/10, Y_Figura/2, 2*Z_Figura/5]
+    d4 = [7*X_Figura/10, Y_Figura/2, 0]
     dcara = [d1, d2, d3, d4]
 
     #figura castillo
-    e1 = [0, 120, 40]
-    e2 = [0, 120, 100]
-    e3 = [20, 120, 100]
-    e4 = [20, 120, 80]
-    e5 = [80, 120, 80]
-    e6 = [80, 120, 100]
-    e7 = [100, 120, 100]
-    e8 = [100, 120, 40]
+    e1 = [0, 3*Y_Figura/4, 2*Z_Figura/5]
+    e2 = [0, 3*Y_Figura/4, Z_Figura]
+    e3 = [X_Figura/5, 3*Y_Figura/4, Z_Figura]
+    e4 = [X_Figura/5, 3*Y_Figura/4, 4*Z_Figura/5]
+    e5 = [4*X_Figura/5, 3*Y_Figura/4, 4*Z_Figura/5]
+    e6 = [4*X_Figura/5, 3*Y_Figura/4, Z_Figura]
+    e7 = [X_Figura, 3*Y_Figura/4, Z_Figura]
+    e8 = [X_Figura, 3*Y_Figura/4, 2*Z_Figura/5]
     ecara = [e1, e2, e3, e4, e5, e6, e7, e8]
 
     #----------------POLIGONOS DE LA VISTA SUPERIOR O PLANTA
     #figura
-    f1 = [0, 120, 100]
-    f2 = [0, 160, 100]
-    f3 = [20, 160, 100]
-    f4 = [20, 120, 100]
+    f1 = [0, 3*Y_Figura/4, Z_Figura]
+    f2 = [0, Y_Figura, Z_Figura]
+    f3 = [X_Figura/5, Y_Figura, Z_Figura]
+    f4 = [X_Figura/5, 3*Y_Figura/4, Z_Figura]
     fcara = [f1, f2, f3, f4]
 
     #figura
-    g1 = [80, 120, 100]
-    g2 = [80, 160, 100]
-    g3 = [100, 160, 100]
-    g4 = [100, 120, 100]
+    g1 = [4*X_Figura/5, 3*Y_Figura/4, Z_Figura]
+    g2 = [4*X_Figura/5, Y_Figura, Z_Figura]
+    g3 = [X_Figura, Y_Figura, Z_Figura]
+    g4 = [X_Figura, 3*Y_Figura/4, Z_Figura]
     gcara = [g1, g2, g3, g4]
 
     #superior en medio de pequenitas
-    h1 = [20, 120, 80]
-    h2 = [20, 160, 80]
-    h3 = [80, 160, 80]
-    h4 = [80, 120, 80]
+    h1 = [X_Figura/5, 3*Y_Figura/4, 4*Z_Figura/5]
+    h2 = [X_Figura/5, Y_Figura, 4*Z_Figura/5]
+    h3 = [4*X_Figura/5, Y_Figura, 4*Z_Figura/5]
+    h4 = [4*X_Figura/5, 3*Y_Figura/4, 4*Z_Figura/5]
     hcara = [h1, h2, h3, h4]
 
     #superior mitad en forma mitad h
-    i1 = [0, 0, 40]
-    i2 = [0, 120, 40]
-    i3 = [100, 120, 40]
-    i4 = [100, 0, 40]
-    i5 = [70, 0, 40]
-    i6 = [70, 80, 40]
-    i7 = [30, 80, 40]
-    i8 = [30, 0, 40]
+    i1 = [0, 0, 2*Z_Figura/5]
+    i2 = [0, 3*Y_Figura/4, 2*Z_Figura/5]
+    i3 = [X_Figura, 3*Y_Figura/4, 2*Z_Figura/5]
+    i4 = [X_Figura, 0, 2*Z_Figura/5]
+    i5 = [7*X_Figura/10, 0, 2*Z_Figura/5]
+    i6 = [7*X_Figura/10, Y_Figura/2, 2*Z_Figura/5]
+    i7 = [3*X_Figura/10, Y_Figura/2, 2*Z_Figura/5]
+    i8 = [3*X_Figura/10, 0, 2*Z_Figura/5]
     icara = [i1, i2, i3, i4, i5, i6, i7, i8]
 
     #----------------POLIGONOS DE LA VISTA CONTRARIO LATERAL
 
-    l1 = [30,0,0]
-    l2 = [30,80,0]
-    l3 = [30,80,40]
-    l4 = [30,0,40]
+    l1 = [3*X_Figura/10,0,0]
+    l2 = [3*X_Figura/10,Y_Figura/2,0]
+    l3 = [3*X_Figura/10,Y_Figura/2,2*Z_Figura/5]
+    l4 = [3*X_Figura/10,0,2*Z_Figura/5]
     lcara = [l1, l2, l3, l4]
 
-    m1 = [20, 120, 80]
-    m2 = [20, 160, 80]
-    m3 = [20, 160, 100]
-    m4 = [20, 120, 100]
+    m1 = [X_Figura/5, 3*Y_Figura/4, 4*Z_Figura/5]
+    m2 = [X_Figura/5, Y_Figura, 4*Z_Figura/5]
+    m3 = [X_Figura/5, Y_Figura, Z_Figura]
+    m4 = [X_Figura/5, 3*Y_Figura/4, Z_Figura]
     mcara = [m1, m2, m3, m4]
 
-    n1 = [100, 0, 0]
-    n2 = [100, 160, 0]
-    n3 = [100, 160, 100]
-    n4 = [100, 120, 100]
-    n5 = [100, 120, 40]
-    n6 = [100, 0, 40]
+    n1 = [X_Figura, 0, 0]
+    n2 = [X_Figura, Y_Figura, 0]
+    n3 = [X_Figura, Y_Figura, Z_Figura]
+    n4 = [X_Figura, 3*Y_Figura/4, Z_Figura]
+    n5 = [X_Figura, 3*Y_Figura/4, 2*Z_Figura/5]
+    n6 = [X_Figura, 0, 2*Z_Figura/5]
     ncara = [n1, n2, n3, n4, n5, n6]
 
     #----------------POLIGONOS DE LA VISTA CONTRARIA FRONTAL
 
-    o1 = [0, 160, 0]
-    o2 = [0, 160, 100]
-    o3 = [20, 160, 100]
-    o4 = [20, 160, 80]
-    o5 = [80, 160, 80]
-    o6 = [80, 160, 100]
-    o7 = [100, 160, 100]
-    o8 = [100, 160, 0]
+    o1 = [0, Y_Figura, 0]
+    o2 = [0, Y_Figura, Z_Figura]
+    o3 = [X_Figura/5, Y_Figura, Z_Figura]
+    o4 = [X_Figura/5, Y_Figura, 4*Z_Figura/5]
+    o5 = [4*X_Figura/5, Y_Figura, 4*Z_Figura/5]
+    o6 = [4*X_Figura/5, Y_Figura, Z_Figura]
+    o7 = [X_Figura, Y_Figura, Z_Figura]
+    o8 = [X_Figura, Y_Figura, 0]
     ocara = [o1, o2, o3, o4, o5, o6, o7, o8]
 
     #====================DIBUJAR FIGURA ISOMETRICA=============================
